@@ -1,0 +1,156 @@
+//
+//  FileDestination.swift
+//
+
+import Foundation
+
+public class FileDestination: BaseDestination {
+
+    public var logFileURL: URL?
+    public var syncAfterEachWrite: Bool = false
+
+    override public var defaultHashValue: Int {return 2}
+    let fileManager = FileManager.default
+
+    public init(logFileURL: URL? = nil) {
+        if let logFileURL = logFileURL {
+            self.logFileURL = logFileURL
+            super.init()
+            return
+        }
+
+        // platform-dependent logfile directory default
+        var baseURL: URL?
+        #if os(OSX)
+            if let url = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first {
+                baseURL = url
+                // try to use ~/Library/Caches/APP NAME instead of ~/Library/Caches
+                if let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleExecutable") as? String {
+                    do {
+                        if let appURL = baseURL?.appendingPathComponent(appName, isDirectory: true) {
+                            try fileManager.createDirectory(
+                                at: appURL,
+                                withIntermediateDirectories: true,
+                                attributes: nil
+                            )
+                            baseURL = appURL
+                        }
+                    } catch {
+                        print("Warning! Could not create folder /Library/Caches/\(appName)")
+                    }
+                }
+            }
+        #else
+            #if os(Linux)
+                baseURL = URL(fileURLWithPath: "/var/cache")
+            #else
+                // iOS, watchOS, etc. are using the caches directory
+                if let url = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first {
+                    baseURL = url
+                }
+            #endif
+        #endif
+
+        if let baseURL = baseURL {
+            self.logFileURL = baseURL.appendingPathComponent("LogsViewer.log", isDirectory: false)
+        }
+        super.init()
+    }
+
+    // append to file. uses full base class functionality
+    override public func send(
+        _ level: LogsViewer.Level,
+        msg: String,
+        thread: String,
+        file: String,
+        function: String,
+        line: Int,
+        context: Any? = nil
+    ) -> String? {
+        let formattedString = super.send(
+            level,
+            msg: msg,
+            thread: thread,
+            file: file,
+            function: function,
+            line: line,
+            context: context
+        )
+
+        if let str = formattedString {
+            _ = saveToFile(str: str)
+        }
+        return formattedString
+    }
+
+    /// appends a string as line to a file.
+    /// returns boolean about success
+    func saveToFile(str: String) -> Bool {
+        guard let url = logFileURL else { return false }
+
+        let line = str + "\n"
+        guard let data = line.data(using: String.Encoding.utf8) else { return false }
+
+        return write(data: data, to: url)
+    }
+
+    private func write(data: Data, to url: URL) -> Bool {
+        var success = false
+        let coordinator = NSFileCoordinator(filePresenter: nil)
+        var error: NSError?
+        coordinator.coordinate(writingItemAt: url, error: &error) { url in
+            do {
+                if fileManager.fileExists(atPath: url.path) == false {
+
+                    let directoryURL = url.deletingLastPathComponent()
+                    if fileManager.fileExists(atPath: directoryURL.path) == false {
+                        try fileManager.createDirectory(
+                            at: directoryURL,
+                            withIntermediateDirectories: true
+                        )
+                    }
+                    fileManager.createFile(atPath: url.path, contents: nil)
+
+                    #if os(iOS) || os(watchOS)
+                    if #available(iOS 10.0, watchOS 3.0, *) {
+                        var attributes = try fileManager.attributesOfItem(atPath: url.path)
+                        attributes[FileAttributeKey.protectionKey] = FileProtectionType.none
+                        try fileManager.setAttributes(attributes, ofItemAtPath: url.path)
+                    }
+                    #endif
+                }
+
+                let fileHandle = try FileHandle(forWritingTo: url)
+                fileHandle.seekToEndOfFile()
+                fileHandle.write(data)
+                if syncAfterEachWrite {
+                    fileHandle.synchronizeFile()
+                }
+                fileHandle.closeFile()
+                success = true
+            } catch {
+                print("LogsViewer File Destination could not write to file \(url).")
+            }
+        }
+
+        if let error = error {
+            print("Failed writing file with error: \(String(describing: error))")
+            return false
+        }
+
+        return success
+    }
+
+    /// deletes log file.
+    /// returns true if file was removed or does not exist, false otherwise
+    public func deleteLogFile() -> Bool {
+        guard let url = logFileURL, fileManager.fileExists(atPath: url.path) == true else { return true }
+        do {
+            try fileManager.removeItem(at: url)
+            return true
+        } catch {
+            print("LogsViewer File Destination could not remove file \(url).")
+            return false
+        }
+    }
+}
