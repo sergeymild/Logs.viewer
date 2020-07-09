@@ -16,15 +16,16 @@
 		92115B8D249D259A00CF115A /* Base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92115B89249D258700CF115A /* Base64.swift */; };
 		92115B8E249D259A00CF115A /* BaseDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92115B84249D258700CF115A /* BaseDestination.swift */; };
 		92115B8F249D259A00CF115A /* ConsoleDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92115B83249D258700CF115A /* ConsoleDestination.swift */; };
-		92115B90249D259A00CF115A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92115B82249D258700CF115A /* Extensions.swift */; };
 		92115B91249D259A00CF115A /* FileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92115B87249D258700CF115A /* FileDestination.swift */; };
 		92115B92249D259A00CF115A /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92115B88249D258700CF115A /* Filter.swift */; };
 		92115B93249D259A00CF115A /* FilterValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92115B8A249D258700CF115A /* FilterValidator.swift */; };
 		92115B96249D259A00CF115A /* LogsViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92115B86249D258700CF115A /* LogsViewer.swift */; };
 		92115B9B249D28CE00CF115A /* LocalWebserverDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92115B9A249D28CE00CF115A /* LocalWebserverDestination.swift */; };
-		9236C81A24B4A63D00F91DF2 /* app.864f531c.css in Resources */ = {isa = PBXBuildFile; fileRef = 9236C81924B4A63800F91DF2 /* app.864f531c.css */; };
-		9236C81D24B4BB5900F91DF2 /* app.8ebb8708.js in Resources */ = {isa = PBXBuildFile; fileRef = 9236C81B24B4BB5000F91DF2 /* app.8ebb8708.js */; };
-		9236C81E24B4BB5900F91DF2 /* chunk-vendors.c40d3b3a.js in Resources */ = {isa = PBXBuildFile; fileRef = 9236C81C24B4BB5000F91DF2 /* chunk-vendors.c40d3b3a.js */; };
+		92EC6BDD24B6EBC400B57AEF /* app.ab9cfc66.css in Resources */ = {isa = PBXBuildFile; fileRef = 92EC6BDC24B6EBBC00B57AEF /* app.ab9cfc66.css */; };
+		92EC6BDE24B6EBCA00B57AEF /* app.259aaf4f.js in Resources */ = {isa = PBXBuildFile; fileRef = 92EC6BD724B6EBBC00B57AEF /* app.259aaf4f.js */; };
+		92EC6BDF24B6EBCA00B57AEF /* chunk-vendors.2f144461.js.map in Resources */ = {isa = PBXBuildFile; fileRef = 92EC6BD824B6EBBC00B57AEF /* chunk-vendors.2f144461.js.map */; };
+		92EC6BE024B6EBCA00B57AEF /* app.259aaf4f.js.map in Resources */ = {isa = PBXBuildFile; fileRef = 92EC6BD924B6EBBC00B57AEF /* app.259aaf4f.js.map */; };
+		92EC6BE124B6EBCA00B57AEF /* chunk-vendors.2f144461.js in Resources */ = {isa = PBXBuildFile; fileRef = 92EC6BDA24B6EBBC00B57AEF /* chunk-vendors.2f144461.js */; };
 		9D07ECA01F2F3A7E00AE8604 /* favicon.ico in Resources */ = {isa = PBXBuildFile; fileRef = 9D07EC9B1F2F3A7E00AE8604 /* favicon.ico */; };
 		9D4A4F5E1F2E2FED000AF312 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 9D4A4F5C1F2E2FED000AF312 /* index.html */; };
 		9DEE21FE1F097812001E5F78 /* LogsViewer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DEE21FC1F097812001E5F78 /* LogsViewer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -39,7 +40,6 @@
 		92039D9E24B4A29C005C228B /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		92039DA324B4A2A7005C228B /* GetWifiAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetWifiAddress.swift; sourceTree = "<group>"; };
 		92115B81249D258700CF115A /* AES256CBC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AES256CBC.swift; sourceTree = "<group>"; };
-		92115B82249D258700CF115A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		92115B83249D258700CF115A /* ConsoleDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleDestination.swift; sourceTree = "<group>"; };
 		92115B84249D258700CF115A /* BaseDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDestination.swift; sourceTree = "<group>"; };
 		92115B86249D258700CF115A /* LogsViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsViewer.swift; sourceTree = "<group>"; };
@@ -48,9 +48,11 @@
 		92115B89249D258700CF115A /* Base64.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base64.swift; sourceTree = "<group>"; };
 		92115B8A249D258700CF115A /* FilterValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterValidator.swift; sourceTree = "<group>"; };
 		92115B9A249D28CE00CF115A /* LocalWebserverDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWebserverDestination.swift; sourceTree = "<group>"; };
-		9236C81924B4A63800F91DF2 /* app.864f531c.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = app.864f531c.css; sourceTree = "<group>"; };
-		9236C81B24B4BB5000F91DF2 /* app.8ebb8708.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = app.8ebb8708.js; sourceTree = "<group>"; };
-		9236C81C24B4BB5000F91DF2 /* chunk-vendors.c40d3b3a.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "chunk-vendors.c40d3b3a.js"; sourceTree = "<group>"; };
+		92EC6BD724B6EBBC00B57AEF /* app.259aaf4f.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = app.259aaf4f.js; sourceTree = "<group>"; };
+		92EC6BD824B6EBBC00B57AEF /* chunk-vendors.2f144461.js.map */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = "chunk-vendors.2f144461.js.map"; sourceTree = "<group>"; };
+		92EC6BD924B6EBBC00B57AEF /* app.259aaf4f.js.map */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = app.259aaf4f.js.map; sourceTree = "<group>"; };
+		92EC6BDA24B6EBBC00B57AEF /* chunk-vendors.2f144461.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "chunk-vendors.2f144461.js"; sourceTree = "<group>"; };
+		92EC6BDC24B6EBBC00B57AEF /* app.ab9cfc66.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = app.ab9cfc66.css; sourceTree = "<group>"; };
 		9D07EC9B1F2F3A7E00AE8604 /* favicon.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = favicon.ico; sourceTree = "<group>"; };
 		9D4A4F5C1F2E2FED000AF312 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		9DEE21F91F097812001E5F78 /* LogsViewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LogsViewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,7 +91,6 @@
 				92115B89249D258700CF115A /* Base64.swift */,
 				92115B84249D258700CF115A /* BaseDestination.swift */,
 				92115B83249D258700CF115A /* ConsoleDestination.swift */,
-				92115B82249D258700CF115A /* Extensions.swift */,
 				92115B87249D258700CF115A /* FileDestination.swift */,
 				92115B88249D258700CF115A /* Filter.swift */,
 				92115B8A249D258700CF115A /* FilterValidator.swift */,
@@ -104,28 +105,30 @@
 			path = SwiftyBeaver;
 			sourceTree = "<group>";
 		};
-		9D07EC991F2F3A7E00AE8604 /* css */ = {
+		92EC6BD624B6EBBC00B57AEF /* js */ = {
 			isa = PBXGroup;
 			children = (
-				9236C81924B4A63800F91DF2 /* app.864f531c.css */,
-			);
-			path = css;
-			sourceTree = "<group>";
-		};
-		9D07EC9C1F2F3A7E00AE8604 /* js */ = {
-			isa = PBXGroup;
-			children = (
-				9236C81B24B4BB5000F91DF2 /* app.8ebb8708.js */,
-				9236C81C24B4BB5000F91DF2 /* chunk-vendors.c40d3b3a.js */,
+				92EC6BD724B6EBBC00B57AEF /* app.259aaf4f.js */,
+				92EC6BD824B6EBBC00B57AEF /* chunk-vendors.2f144461.js.map */,
+				92EC6BD924B6EBBC00B57AEF /* app.259aaf4f.js.map */,
+				92EC6BDA24B6EBBC00B57AEF /* chunk-vendors.2f144461.js */,
 			);
 			path = js;
+			sourceTree = "<group>";
+		};
+		92EC6BDB24B6EBBC00B57AEF /* css */ = {
+			isa = PBXGroup;
+			children = (
+				92EC6BDC24B6EBBC00B57AEF /* app.ab9cfc66.css */,
+			);
+			path = css;
 			sourceTree = "<group>";
 		};
 		9D4A4F5B1F2E2FED000AF312 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				9D07EC991F2F3A7E00AE8604 /* css */,
-				9D07EC9C1F2F3A7E00AE8604 /* js */,
+				92EC6BDB24B6EBBC00B57AEF /* css */,
+				92EC6BD624B6EBBC00B57AEF /* js */,
 				9D07EC9B1F2F3A7E00AE8604 /* favicon.ico */,
 				9D4A4F5C1F2E2FED000AF312 /* index.html */,
 			);
@@ -244,9 +247,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9236C81D24B4BB5900F91DF2 /* app.8ebb8708.js in Resources */,
-				9236C81E24B4BB5900F91DF2 /* chunk-vendors.c40d3b3a.js in Resources */,
-				9236C81A24B4A63D00F91DF2 /* app.864f531c.css in Resources */,
+				92EC6BDE24B6EBCA00B57AEF /* app.259aaf4f.js in Resources */,
+				92EC6BDF24B6EBCA00B57AEF /* chunk-vendors.2f144461.js.map in Resources */,
+				92EC6BE024B6EBCA00B57AEF /* app.259aaf4f.js.map in Resources */,
+				92EC6BE124B6EBCA00B57AEF /* chunk-vendors.2f144461.js in Resources */,
+				92EC6BDD24B6EBC400B57AEF /* app.ab9cfc66.css in Resources */,
 				9D4A4F5E1F2E2FED000AF312 /* index.html in Resources */,
 				9D07ECA01F2F3A7E00AE8604 /* favicon.ico in Resources */,
 			);
@@ -292,7 +297,6 @@
 				92039DA124B4A29C005C228B /* Analitycs.swift in Sources */,
 				92115B93249D259A00CF115A /* FilterValidator.swift in Sources */,
 				92039DA024B4A29C005C228B /* DeviceDetails.swift in Sources */,
-				92115B90249D259A00CF115A /* Extensions.swift in Sources */,
 				92115B92249D259A00CF115A /* Filter.swift in Sources */,
 				92039D9F24B4A29C005C228B /* FileSaver.swift in Sources */,
 			);
