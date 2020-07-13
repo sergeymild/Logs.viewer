@@ -7,9 +7,9 @@ import Foundation
 open class LogsViewer {
 
     /// version string of framework
-    public static let version = "1.0.0"  // UPDATE ON RELEASE!
+    public static let version = "1.0.1"  // UPDATE ON RELEASE!
     /// build number of framework
-    public static let build = 1000 // version 1.6.2 -> 1620, UPDATE ON RELEASE!
+    public static let build = 1001 // version 1.6.2 -> 1620, UPDATE ON RELEASE!
 
     open class Level {
         public let rawValue: String
