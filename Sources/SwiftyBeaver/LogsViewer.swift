@@ -196,7 +196,7 @@ open class LogsViewer {
         if let data = responseData {
             let bcf = ByteCountFormatter()
             bcf.countStyle = .file
-            bodyString = String(data: (data ?? Data()), encoding: .utf8) ?? "empty"
+            bodyString = String(data: data, encoding: .utf8) ?? "empty"
             bodyLength = bcf.string(fromByteCount: Int64(data.count))
         }
         let message: [String: Any] = [
@@ -205,7 +205,7 @@ open class LogsViewer {
             "requestHeaders": headers,
             "requestBody": requestString,
             "statusCode": httpResponse.statusCode,
-            "responseHeaders": responseHeaders,
+            "responseHeaders": responseHeaders.map { "\(($0.base as? String) ?? "unknownKey"): \($1)" },
             "responseBody": bodyString,
             "bodyLength": bodyLength
         ]
