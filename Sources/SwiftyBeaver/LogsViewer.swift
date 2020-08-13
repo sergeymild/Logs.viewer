@@ -214,14 +214,16 @@ open class LogsViewer {
         }
         
         if destinations.contains(where: { $0 is ConsoleDestination }) {
-            print("method: \(request.httpMethod ?? "UNKNOWN")\n")
-            print("url: \(request.url?.absoluteString ?? "unknown")\n")
-            print("requestHeaders: \(headers)\n")
-            print("requestBody: \(requestString)\n")
-            print("statusCode: \(httpResponse.statusCode)\n")
-            print("responseHeaders: \(responseHeaders)\n")
-            print("responseBody: \(bodyString)\n")
-            print("bodyLength: \(bodyLength)\n")
+            print("==================================>>>>")
+            print("method: \(request.httpMethod ?? "UNKNOWN")")
+            print("url: \(request.url?.absoluteString ?? "unknown")")
+            print("requestHeaders: \(headers)")
+            print("requestBody: \(requestString)")
+            print("statusCode: \(httpResponse.statusCode)")
+            print("responseHeaders: \(responseHeaders)")
+            print("responseBody: \(bodyString)")
+            print("bodyLength: \(bodyLength)")
+            print("<<<<==================================")
         }
         
         custom(
