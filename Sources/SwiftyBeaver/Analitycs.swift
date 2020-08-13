@@ -60,6 +60,7 @@ class Analitycs {
         dict["firstAppBuild"] = appBuild()
         dict["appBuild"] = appBuild()
         dict["identifier"] = Bundle.main.bundleIdentifier
+        dict["deviceId"] = UIDevice.current.identifierForVendor!.uuidString
 
         if let url = fileURL,
             let loadedDict = dictFromFile(url) {

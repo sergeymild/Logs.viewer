@@ -4,6 +4,12 @@
 
 import Foundation
 
+extension LogsViewer.Level: Equatable {
+    public static func == (lhs: LogsViewer.Level, rhs: LogsViewer.Level) -> Bool {
+        return lhs.rawValue == rhs.rawValue && lhs.color == rhs.color
+    }
+}
+
 open class LogsViewer {
 
     /// version string of framework
@@ -170,7 +176,10 @@ open class LogsViewer {
     public class func http(
         request: URLRequest?,
         response: URLResponse?,
-        responseData: Data? = nil
+        responseData: Data? = nil,
+        _ file: String = #file,
+        _ function: String = #function,
+        _ line: Int = #line
     ) {
         guard let request = request else { return }
         guard let response = response else { return }
@@ -191,7 +200,7 @@ open class LogsViewer {
             bodyLength = bcf.string(fromByteCount: Int64(data.count))
         }
         let message: [String: Any] = [
-            "method": request.httpMethod ?? "UNKNOWN",
+            "method": request.httpMethod ?? "unknown",
             "url": request.url?.absoluteString ?? "unknown",
             "requestHeaders": headers,
             "requestBody": requestString,
@@ -202,6 +211,17 @@ open class LogsViewer {
         ]
         guard let string = jsonStringFromDict(message) else {
             return log("Error create http log")
+        }
+        
+        if destinations.contains(where: { $0 is ConsoleDestination }) {
+            print("method: \(request.httpMethod ?? "UNKNOWN")\n")
+            print("url: \(request.url?.absoluteString ?? "unknown")\n")
+            print("requestHeaders: \(headers)\n")
+            print("requestBody: \(requestString)\n")
+            print("statusCode: \(httpResponse.statusCode)\n")
+            print("responseHeaders: \(responseHeaders)\n")
+            print("responseBody: \(bodyString)\n")
+            print("bodyLength: \(bodyLength)\n")
         }
         
         custom(

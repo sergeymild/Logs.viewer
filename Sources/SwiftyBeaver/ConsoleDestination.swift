@@ -22,6 +22,7 @@ public class ConsoleDestination: BaseDestination {
         line: Int,
         context: Any? = nil
     ) -> String? {
+        if level == LogsViewer.Level.http { return nil }
         let formattedString = super.send(
             level,
             msg: msg,

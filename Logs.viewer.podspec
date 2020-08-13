@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Logs.viewer'
-    s.version          = '1.0.0'
+    s.version          = '1.0.1'
     s.summary          = 'A library for debugging iOS applications in browser'
     s.homepage         = 'https://github.com/sergeymild/Logs.viewer'
     s.license          = { type: 'MIT', file: 'LICENSE' }
@@ -13,4 +13,5 @@ Pod::Spec.new do |s|
     s.resource_bundles = { 'com.sergeymild.LogsViewer.assets' => ['Sources/**/*.{js,css,ico,html}'] }
 
     s.dependency 'Swifter'
+    s.dependency 'Socket.IO-Client-Swift', '~> 15.2.0'
 end

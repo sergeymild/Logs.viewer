@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        logs.add(destination: LocalWebserverDestination())
+        logs.add(destination: RemoteWebserverDestination())
         logs.add(destination: ConsoleDestination())
         
         logs.info("start app")
