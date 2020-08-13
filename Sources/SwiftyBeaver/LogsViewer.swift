@@ -205,7 +205,7 @@ open class LogsViewer {
             "requestHeaders": headers,
             "requestBody": requestString,
             "statusCode": httpResponse.statusCode,
-            "responseHeaders": responseHeaders.map { "\(($0.base as? String) ?? "unknownKey"): \($1)" },
+            "responseHeaders": responseHeaders,
             "responseBody": bodyString,
             "bodyLength": bodyLength
         ]
@@ -220,7 +220,7 @@ open class LogsViewer {
             print("requestHeaders:  \(headers)")
             print("requestBody:     \(requestString)")
             print("statusCode:      \(httpResponse.statusCode)")
-            print("responseHeaders: \(responseHeaders)")
+            print("responseHeaders: \(responseHeaders.map { "\(($0.base as? String) ?? "unknownKey"): \($1)" })")
             print("responseBody:    \(bodyString)")
             print("bodyLength:      \(bodyLength)")
             print("<<<<==================================")
