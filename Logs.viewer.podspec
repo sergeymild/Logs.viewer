@@ -12,6 +12,6 @@ Pod::Spec.new do |s|
     s.source_files = 'Sources/**/*.swift'
     s.resource_bundles = { 'com.sergeymild.LogsViewer.assets' => ['Sources/**/*.{js,css,ico,html}'] }
 
-    s.dependency 'Swifter', '~> 1.5.0-rc.1', configuration: ['Debug']
+    s.dependency 'Swifter', '~> 1.5.0-rc.1'
     s.dependency 'Socket.IO-Client-Swift', '~> 15.2.0'
 end
