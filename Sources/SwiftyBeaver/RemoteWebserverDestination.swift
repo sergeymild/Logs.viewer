@@ -28,7 +28,7 @@ public class RemoteWebserverDestination: BaseDestination {
     }()
     
     private lazy var localPath: String = {
-        let bundle = Bundle(for: LocalWebserverDestination.self).resourceURL!
+        let bundle = Bundle(for: RemoteWebserverDestination.self).resourceURL!
         let path = bundle.appendingPathComponent("com.sergeymild.LogsViewer.assets.bundle")
         return path.path
     }()

@@ -22,6 +22,7 @@
 		92115B96249D259A00CF115A /* LogsViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92115B86249D258700CF115A /* LogsViewer.swift */; };
 		92115B9B249D28CE00CF115A /* LocalWebserverDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92115B9A249D28CE00CF115A /* LocalWebserverDestination.swift */; };
 		92C7B12424C08B9D00F44388 /* RemoteWebserverDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C7B12324C08B9D00F44388 /* RemoteWebserverDestination.swift */; };
+		92EA99592518EBC600D12606 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EA99582518EBC600D12606 /* Helpers.swift */; };
 		92EC6BF824BC9DEA00B57AEF /* app.259aaf4f.js in Resources */ = {isa = PBXBuildFile; fileRef = 92EC6BF124BC9DE100B57AEF /* app.259aaf4f.js */; };
 		92EC6BF924BC9DEA00B57AEF /* chunk-vendors.2f144461.js.map in Resources */ = {isa = PBXBuildFile; fileRef = 92EC6BF224BC9DE100B57AEF /* chunk-vendors.2f144461.js.map */; };
 		92EC6BFA24BC9DEA00B57AEF /* app.259aaf4f.js.map in Resources */ = {isa = PBXBuildFile; fileRef = 92EC6BF324BC9DE100B57AEF /* app.259aaf4f.js.map */; };
@@ -49,6 +50,7 @@
 		92115B8A249D258700CF115A /* FilterValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterValidator.swift; sourceTree = "<group>"; };
 		92115B9A249D28CE00CF115A /* LocalWebserverDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWebserverDestination.swift; sourceTree = "<group>"; };
 		92C7B12324C08B9D00F44388 /* RemoteWebserverDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteWebserverDestination.swift; sourceTree = "<group>"; };
+		92EA99582518EBC600D12606 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		92EC6BF124BC9DE100B57AEF /* app.259aaf4f.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = app.259aaf4f.js; sourceTree = "<group>"; };
 		92EC6BF224BC9DE100B57AEF /* chunk-vendors.2f144461.js.map */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = "chunk-vendors.2f144461.js.map"; sourceTree = "<group>"; };
 		92EC6BF324BC9DE100B57AEF /* app.259aaf4f.js.map */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = app.259aaf4f.js.map; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				92039D9E24B4A29C005C228B /* Log.swift */,
 				92039DA324B4A2A7005C228B /* GetWifiAddress.swift */,
 				92C7B12324C08B9D00F44388 /* RemoteWebserverDestination.swift */,
+				92EA99582518EBC600D12606 /* Helpers.swift */,
 			);
 			path = SwiftyBeaver;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				92115B91249D259A00CF115A /* FileDestination.swift in Sources */,
 				92115B8D249D259A00CF115A /* Base64.swift in Sources */,
 				92039DA124B4A29C005C228B /* Analitycs.swift in Sources */,
+				92EA99592518EBC600D12606 /* Helpers.swift in Sources */,
 				92115B93249D259A00CF115A /* FilterValidator.swift in Sources */,
 				92039DA024B4A29C005C228B /* DeviceDetails.swift in Sources */,
 				92115B92249D259A00CF115A /* Filter.swift in Sources */,
