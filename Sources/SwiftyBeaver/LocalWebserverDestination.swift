@@ -44,7 +44,7 @@ public class LocalWebserverDestination: BaseDestination {
             let log = [
                 "timestamp": Date().timeIntervalSince1970,
                 "level": level.rawValue,
-                "message": msg,
+                "message": msg.trimmingCharacters(in: .whitespaces).isEmpty ? function : msg,
                 "thread": thread,
                 "fileName": file.components(separatedBy: "/").last!,
                 "function": function,

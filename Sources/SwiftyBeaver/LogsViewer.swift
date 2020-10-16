@@ -228,7 +228,10 @@ open class LogsViewer {
         
         custom(
             level: .http,
-            message: string
+            message: string,
+            file: file,
+            function: function,
+            line: line
         )
     }
 
@@ -239,7 +242,8 @@ open class LogsViewer {
         file: String = #file,
         function: String = #function,
         line: Int = #line,
-        context: Any? = nil
+        context: Any? = nil,
+        skipLogToConsole: Bool = false
     ) {
         dispatchSend(
             level: level,
@@ -248,7 +252,8 @@ open class LogsViewer {
             file: file,
             function: function,
             line: line,
-            context: context
+            context: context,
+            skipLogToConsole: skipLogToConsole
         )
     }
 
@@ -260,45 +265,41 @@ open class LogsViewer {
         file: String,
         function: String,
         line: Int,
-        context: Any?
+        context: Any?,
+        skipLogToConsole: Bool
     ) {
         var resolvedMessage: String?
         for dest in destinations {
 
             guard let queue = dest.queue else { continue }
+            if skipLogToConsole && dest is ConsoleDestination { continue }
 
             resolvedMessage = resolvedMessage == nil && dest.hasMessageFilters() ? "\(message)" : resolvedMessage
-            if dest.shouldLevelBeLogged(level, path: file, function: function, message: resolvedMessage) {
-                // try to convert msg object to String and put it on queue
-                let msgStr = resolvedMessage == nil ? "\(message)" : resolvedMessage!
-                let f = stripParams(function: function)
-
-                if dest.asynchronously {
-                    queue.async {
-                        _ = dest.send(
-                            level,
-                            msg: msgStr,
-                            thread: thread,
-                            file: file,
-                            function: f,
-                            line: line,
-                            context: context
-                        )
-                    }
-                } else {
-                    queue.sync {
-                        _ = dest.send(
-                            level,
-                            msg: msgStr,
-                            thread: thread,
-                            file: file,
-                            function: f,
-                            line: line,
-                            context: context
-                        )
-                    }
-                }
+            
+            if !dest.shouldLevelBeLogged(level, path: file, function: function, message: resolvedMessage) {
+                continue
             }
+            
+            // try to convert msg object to String and put it on queue
+            let msgStr = resolvedMessage == nil ? "\(message)" : resolvedMessage!
+            let f = stripParams(function: function)
+            let work = {
+                _ = dest.send(
+                    level,
+                    msg: msgStr,
+                    thread: thread,
+                    file: file,
+                    function: f,
+                    line: line,
+                    context: context
+                )
+            }
+
+            if dest.asynchronously {
+                queue.async(execute: work)
+                continue
+            }
+            queue.sync(execute: work)
         }
     }
 
