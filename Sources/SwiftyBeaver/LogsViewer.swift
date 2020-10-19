@@ -10,6 +10,17 @@ extension LogsViewer.Level: Equatable {
     }
 }
 
+public enum HttpParts {
+    case method
+    case url
+    case requestHeaders
+    case requestBody
+    case statusCode
+    case responseHeaders
+    case responseBody
+    case bodyLength
+}
+
 open class LogsViewer {
 
     /// version string of framework
@@ -177,6 +188,7 @@ open class LogsViewer {
         request: URLRequest?,
         response: URLResponse?,
         responseData: Data? = nil,
+        excludeHttpParts: [HttpParts] = [],
         _ file: String = #file,
         _ function: String = #function,
         _ line: Int = #line
@@ -186,8 +198,11 @@ open class LogsViewer {
         let headers = request.allHTTPHeaderFields ?? [:]
         var requestString = ""
         if request.httpMethod == "POST" {
-            let httpBody = request.httpBody ?? Data()
-            requestString = String(data: httpBody, encoding: .utf8) ?? "empty"
+            if let httpBody = request.httpBody {
+                requestString = String(data: httpBody, encoding: .utf8) ?? "empty"
+            } else {
+                requestString = "empty"
+            }
         }
         let httpResponse = response as! HTTPURLResponse
         let responseHeaders = httpResponse.allHeaderFields
@@ -199,30 +214,62 @@ open class LogsViewer {
             bodyString = String(data: data, encoding: .utf8) ?? "empty"
             bodyLength = bcf.string(fromByteCount: Int64(data.count))
         }
-        let message: [String: Any] = [
-            "method": request.httpMethod ?? "unknown",
-            "url": request.url?.absoluteString ?? "unknown",
-            "requestHeaders": headers,
-            "requestBody": requestString,
-            "statusCode": httpResponse.statusCode,
-            "responseHeaders": responseHeaders,
-            "responseBody": bodyString,
-            "bodyLength": bodyLength
-        ]
+        var message: [String: Any] = [:]
+        if !excludeHttpParts.contains(.method) {
+            message["method"] = request.httpMethod ?? "unknown"
+        }
+        if !excludeHttpParts.contains(.url) {
+            message["url"] = request.url?.absoluteString ?? "unknown"
+        }
+        if !excludeHttpParts.contains(.requestHeaders) {
+            message["requestHeaders"] = headers
+        }
+        if !excludeHttpParts.contains(.requestBody) {
+            message["requestBody"] = requestString
+        }
+        if !excludeHttpParts.contains(.statusCode) {
+            message["statusCode"] = httpResponse.statusCode
+        }
+        if !excludeHttpParts.contains(.responseHeaders) {
+            message["responseHeaders"] = responseHeaders
+        }
+        if !excludeHttpParts.contains(.responseBody) {
+            message["responseBody"] = bodyString
+        }
+        if !excludeHttpParts.contains(.bodyLength) {
+            message["bodyLength"] = bodyLength
+        }
+        
         guard let string = jsonStringFromDict(message) else {
             return log("Error create http log")
         }
         
         if destinations.contains(where: { $0 is ConsoleDestination }) {
             print("==================================>>>>")
-            print("method:          \(request.httpMethod ?? "UNKNOWN")")
-            print("url:             \(request.url?.absoluteString ?? "unknown")")
-            print("requestHeaders:  \(headers)")
-            print("requestBody:     \(requestString)")
-            print("statusCode:      \(httpResponse.statusCode)")
-            print("responseHeaders: \(responseHeaders.map { "\(($0.base as? String) ?? "unknownKey"): \($1)" })")
-            print("responseBody:    \(bodyString)")
-            print("bodyLength:      \(bodyLength)")
+            if !excludeHttpParts.contains(.method) {
+                print("method:          \(request.httpMethod ?? "UNKNOWN")")
+            }
+            if !excludeHttpParts.contains(.url) {
+                print("url:             \(request.url?.absoluteString ?? "unknown")")
+            }
+            if !excludeHttpParts.contains(.requestHeaders) {
+                print("requestHeaders:  \(headers)")
+            }
+            if !excludeHttpParts.contains(.requestBody) {
+                print("requestBody:     \(requestString)")
+            }
+            if !excludeHttpParts.contains(.statusCode) {
+                print("statusCode:      \(httpResponse.statusCode)")
+            }
+            if !excludeHttpParts.contains(.responseHeaders) {
+                print("responseHeaders: \(responseHeaders.map { "\(($0.base as? String) ?? "unknownKey"): \($1)" })")
+            }
+            if !excludeHttpParts.contains(.responseBody) {
+                print("responseBody:    \(bodyString)")
+            }
+            if !excludeHttpParts.contains(.bodyLength) {
+                print("bodyLength:      \(bodyLength)")
+            }
             print("<<<<==================================")
         }
         
