@@ -33,7 +33,7 @@ open class BaseDestination: Hashable, Equatable {
     open var format = "$DHH:mm:ss.SSS$d $C$L$c $N.$F:$l - $M"
 
     /// runs in own serial background thread for better performance
-    open var asynchronously = true
+    open var asynchronously: Bool { true }
 
     var reset = ""
     var escape = ""

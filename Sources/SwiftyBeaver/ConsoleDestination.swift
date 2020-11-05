@@ -5,11 +5,10 @@
 import Foundation
 
 public class ConsoleDestination: BaseDestination {
-
     /// use NSLog instead of print, default is false
     public var useNSLog = false
 
-
+    public override var asynchronously: Bool { false }
     override public var defaultHashValue: Int { return 1 }
 
     // print to Xcode Console. uses full base class functionality
