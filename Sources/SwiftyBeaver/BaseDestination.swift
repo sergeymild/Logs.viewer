@@ -233,6 +233,7 @@ open class BaseDestination: Hashable, Equatable {
         // right trim only
         text = text.replacingOccurrences(of: "\\s+$", with: "", options: .regularExpression)
         if text.last == "-" { text.removeLast(2) }
+        text.removeFirst()
         return text
     }
 
