@@ -35,9 +35,6 @@ open class BaseDestination: Hashable, Equatable {
     /// runs in own serial background thread for better performance
     open var asynchronously = true
 
-    /// do not log any message which has a lower level than this one
-    open var minLevel = LogsViewer.Level.all
-
     var reset = ""
     var escape = ""
 
@@ -383,17 +380,7 @@ open class BaseDestination: Hashable, Equatable {
     ) -> Bool {
 
         if filters.isEmpty {
-            if level.rawValue >= minLevel.rawValue {
-                if debugPrint {
-                    print("filters are empty and level >= minLevel")
-                }
-                return true
-            } else {
-                if debugPrint {
-                    print("filters are empty and level < minLevel")
-                }
-                return false
-            }
+            return true
         }
 
         let filterCheckResult = FilterValidator.validate(input: .init(filters: self.filters, level: level, path: path, function: function, message: message))
@@ -416,15 +403,10 @@ open class BaseDestination: Hashable, Equatable {
         case .some(.noFiltersMatchingType), .none: break
         }
 
-        let checkLogLevel: () -> Bool = {
-            // Check if the log message's level matches or exceeds the minLevel of the destination
-            return level.rawValue >= self.minLevel.rawValue
-        }
-
         // Non-required filters should only be applied if the log entry matches the filter condition (e.g. path)
         switch filterCheckResult[.nonRequired] {
         case .some(.allFiltersMatch): return true
-        case .some(.noFiltersMatchingType), .none: return checkLogLevel()
+        case .some(.noFiltersMatchingType), .none: return true
         case .some(.someFiltersMatch(let partialMatchData)):
             if partialMatchData.fullMatchCount > 0 {
                 // The log entry matches at least one filter condition and the destination's log level
@@ -434,7 +416,7 @@ open class BaseDestination: Hashable, Equatable {
                 return false
             } else {
                 // There is no filter with a matching filter condition. Check the destination's log level
-                return checkLogLevel()
+                return true
             }
         }
     }
