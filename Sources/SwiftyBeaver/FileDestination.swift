@@ -6,7 +6,9 @@ import Foundation
 
 public class FileDestination: BaseDestination {
 
-    public var logFileURL: URL?
+    public var logFileURL: URL? {
+        didSet { Swift.debugPrint("FileDestination(", logFileURL ?? "", ")") }
+    }
     public var syncAfterEachWrite: Bool = false
 
     override public var defaultHashValue: Int {return 2}
@@ -129,12 +131,12 @@ public class FileDestination: BaseDestination {
                 fileHandle.closeFile()
                 success = true
             } catch {
-                print("LogsViewer File Destination could not write to file \(url).")
+                Swift.debugPrint("LogsViewer File Destination could not write to file", url)
             }
         }
 
         if let error = error {
-            print("Failed writing file with error: \(String(describing: error))")
+            Swift.debugPrint("Failed writing file with error:", String(describing: error))
             return false
         }
 
@@ -149,7 +151,7 @@ public class FileDestination: BaseDestination {
             try fileManager.removeItem(at: url)
             return true
         } catch {
-            print("LogsViewer File Destination could not remove file \(url).")
+            Swift.debugPrint("LogsViewer File Destination could not remove file", url)
             return false
         }
     }
